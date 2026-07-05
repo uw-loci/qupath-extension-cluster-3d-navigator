@@ -64,6 +64,16 @@ jobs:
           GH_TOKEN: ${{ secrets.CATALOG_DISPATCH_TOKEN }}
         run: |
           set -euo pipefail
+          # This repo does not yet have the org-level CATALOG_DISPATCH_TOKEN secret
+          # (a cross-repo dispatch token; the built-in GITHUB_TOKEN cannot write to the
+          # catalog repo). Without it, skip gracefully instead of failing CI -- the
+          # catalog is then bumped by hand (prepend the new release, keep prior entries).
+          # An org admin can grant this repo the CATALOG_DISPATCH_TOKEN secret to enable
+          # the auto-bump; nothing else needs to change.
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::warning::CATALOG_DISPATCH_TOKEN is not set on this repo; skipping catalog auto-dispatch. Bump the catalog manually, or grant this repo the org CATALOG_DISPATCH_TOKEN secret."
+            exit 0
+          fi
           gh api repos/uw-loci/qupath-catalog-mikenelson/dispatches \
             -f event_type=extension-release \
             -F "client_payload[repo]=${{ github.repository }}" \
