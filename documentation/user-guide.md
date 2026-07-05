@@ -76,8 +76,9 @@ environment build and no download -- it is pure Java and starts immediately.
 <summary><b>Advanced features</b></summary>
 
 **Display options** (a collapsed panel in the top strip) hold refinements a first-timer never
-needs: crop scale, point size, "Shade points by depth", "Preview crop on hover", "Show axis
-tripod", and "Representative cells per cluster". These persist between sessions. (The
+needs: a **Background** color picker (with an "Auto (theme)" checkbox that matches the QuPath
+light/dark theme), crop scale, point size, "Shade points by depth", "Preview crop on hover",
+"Show axis tripod", and "Representative cells per cluster". These persist between sessions. (The
 **"Show cell images"** toggle itself lives in the top control strip, right after
 **Change axes...**, so it is one click away.)
 
@@ -108,6 +109,9 @@ Persisted between sessions:
 - **Mode** -- current-image vs project-images.
 - **Last axis choice (per project)** -- the X / Y / Z measurements you last used; the picker
   preselects them next time (auto-detection still runs when there is nothing remembered).
+- **Background** -- the 3D view background color. Defaults to **Auto (theme)** (matches the
+  QuPath light/dark theme); uncheck Auto to pick a custom color. Point, text, and tripod colors
+  follow the background's luminance so labels stay readable on any color.
 - **Crop scale** -- preview crop size as a multiple of the cell's bounding box (default 3.0).
 - **Point size** -- on-screen size of each plotted point (default 2.0).
 - **Shade points by depth** -- depth-cue shading (default on).
