@@ -16,7 +16,7 @@ plugins {
 qupathExtension {
     name = "qupath-extension-cluster-3d-navigator"
     group = "io.github.uw-loci"
-    version = "0.1.0"
+    version = "0.1.1"
     description = "Interactive in-QuPath 3D point cloud of clustered cells; click a point to select and center that cell in the viewer. Generic across any clustering tool."
     automaticModule = "io.github.uw.loci.extension.cluster3dnav"
 }
@@ -51,7 +51,7 @@ dependencies {
     // first (resolved here from mavenLocal). isTransitive=false: core's published POM
     // lists QuPath/JavaFX (injected by qupath-conventions) but the QuPath host provides
     // those at runtime -- bundling them would balloon the jar, so we shade only core.
-    implementation("io.github.uw-loci:cluster3d-core:0.1.0") { isTransitive = false }
+    implementation("io.github.uw-loci:cluster3d-core:0.1.1") { isTransitive = false }
 
     // For testing
     testImplementation(libs.bundles.qupath)
@@ -65,6 +65,12 @@ dependencies {
     testImplementation("org.openjfx:javafx-graphics:$javafxVersion")
     testImplementation("org.openjfx:javafx-controls:$javafxVersion")
 }
+
+// NOTE on the shaded cluster3d-core package: this extension deliberately does NOT relocate
+// it. QP-CAT relocates ITS copy to qupath.ext.qpcat.internal.cluster3d, so the two extensions
+// no longer share the qupath.ext.cluster3d package -> no class collision / version-skew when
+// both are installed. (Relocating here too is blocked by a shadow RelocatorRemapper ASM bug on
+// this extension's own Cluster3DNavigatorExtension bytecode; relocating one side is sufficient.)
 
 tasks.withType<JavaCompile> {
     options.release.set(21) // QuPath 0.7 runs on Java 21; pin bytecode target so any build JDK emits loadable classes

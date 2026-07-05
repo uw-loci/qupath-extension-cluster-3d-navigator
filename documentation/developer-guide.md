@@ -69,7 +69,7 @@ source headers and `cluster3d-core/NOTICE`.
 - **Picking:** a uniform screen-space bucket grid rebuilt each redraw; hit-test scans the
   pointer's bucket and neighbors -> effectively O(1). Ties resolve to the front-most (min-depth)
   point. Pick radius is an internal constant (7 px).
-- **In-cloud cell images (VEST-style LOD):** optional (`Show cell images when zoomed in`). Each
+- **In-cloud cell images (VEST-style LOD):** optional (top-strip `Show cell images` toggle). Each
   billboard is the crop drawn axis-aligned at the cell's projected `(sx, sy)` -- it always faces
   the camera by construction. `PointCloudView.planLod` (pure, unit-tested) is the footprint gate
   (thumbnails activate only when zoomed in enough). **Selection is screen-space occlusion by

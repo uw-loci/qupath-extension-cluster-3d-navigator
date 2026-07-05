@@ -77,8 +77,9 @@ environment build and no download -- it is pure Java and starts immediately.
 
 **Display options** (a collapsed panel in the top strip) hold refinements a first-timer never
 needs: crop scale, point size, "Shade points by depth", "Preview crop on hover", "Show axis
-tripod", "Show cell images when zoomed in", and "Representative cells per cluster". These persist
-between sessions.
+tripod", and "Representative cells per cluster". These persist between sessions. (The
+**"Show cell images"** toggle itself lives in the top control strip, right after
+**Change axes...**, so it is one click away.)
 
 **Planned / not yet available** (none of these ship in this version):
 
@@ -112,10 +113,20 @@ Persisted between sessions:
 - **Shade points by depth** -- depth-cue shading (default on).
 - **Preview crop on hover** -- load a thumbnail on hover, not only on click (default off).
 - **Show axis tripod** -- the corner X/Y/Z direction marker (default on).
-- **Show cell images when zoomed in** -- draw the front-most cells as their crop images at their
-  3D positions once you zoom in far enough (default off; crops load on demand, bounded per frame).
+- **Cell limit per image** (top strip) -- caps how many cells per image are loaded (0 = no
+  limit). A performance option for slower computers: it improves responsiveness but limits the
+  data shown. Cells are chosen so every cluster stays represented (each cluster keeps at least its
+  representative cells; the rest of the budget is filled at random using the **Seed**). The "?"
+  button next to it explains the selection; the Points counter shows "(limited)" when active.
+- **Seed** (top strip) -- the random seed used to choose which cells are shown when a cell limit
+  is set; change it to resample (default 42).
+- **Show cell images** (top strip, after Change axes...) -- draw the front-most cells as their
+  crop images at their 3D positions once you zoom in far enough (default off; crops load on demand,
+  bounded per frame). Crops are rendered with the current viewer's brightness/contrast/channel
+  settings for every image (when its channel count matches), and crops nearest the cursor load
+  first. While images are still filling in, an **"Image still populating"** banner shows at the top.
 - **Representative cells per cluster** -- how many cells per cluster show as images even when
-  zoomed out (0-5, default 3; 0 = only when zoomed in). Requires "Show cell images when zoomed in".
+  zoomed out (0-5, default 3; 0 = only when zoomed in). Requires "Show cell images".
   The cells are chosen to spread across each cluster (its most central cell plus the most distinct
   ones), and clusters hidden behind nearer ones are suppressed, so far out you see a couple of
   representative images per visible cluster.
