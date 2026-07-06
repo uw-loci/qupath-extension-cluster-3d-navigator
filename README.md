@@ -1,5 +1,7 @@
 # Cluster 3D Navigator
 
+![Cluster 3D Navigator in action](documentation/images/3D-Navigator.gif)
+
 An interactive **3D point cloud of your clustered cells** inside QuPath. One point per
 detection, colored by its classification (PathClass). Rotate, zoom, and pan the cloud, then
 **click a point to select and center that cell in the QuPath viewer** -- an interesting spot
