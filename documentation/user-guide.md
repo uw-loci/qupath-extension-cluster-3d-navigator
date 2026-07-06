@@ -1,8 +1,9 @@
 # Cluster 3D Navigator -- User Guide
 
-Cluster 3D Navigator shows your already-clustered cells as an interactive 3D point cloud --
-one point per detection, colored by its class -- and lets you click a point to select and
-center that cell in the QuPath viewer.
+Cluster 3D Navigator shows your already-clustered cells as an interactive point cloud --
+one point per detection, colored by its class -- in a rotatable **3D** view or a flat
+**2D** scatter, and lets you click a point to select and center that cell in the QuPath
+viewer.
 
 <details open>
 <summary><b>Getting started</b> (read this first)</summary>
@@ -11,14 +12,15 @@ center that cell in the QuPath viewer.
 cluster for you. Prerequisites:
 
 - Detections that carry a **PathClass** (the group/color), and
-- **At least 3 numeric measurement columns** (the X / Y / Z axes).
+- **At least 2 numeric measurement columns** for the flat 2D view (X / Y), or **3** for the
+  rotatable 3D view (X / Y / Z).
 
 **How to get those from any clustering tool.** Any tool that classifies detections and writes
 numeric measurements qualifies -- QP-CAT (UMAP/PCA/tSNE + cluster classes), an InstanSeg or
 Cellpose segmentation plus a downstream cluster step, or a hand-rolled Groovy script that
-sets a PathClass and adds measurements. If you only have 2D coordinates, the tool still
-opens; you just pick a third measurement (or repeat one) as Z. (Auto-computing a 3D embedding
-is not in this version -- see *Advanced features*.)
+sets a PathClass and adds measurements. If you clustered in 2D (a 2D UMAP, etc.), switch the
+**View** toggle to **2D** and the tool plots a flat X / Y scatter -- no need to invent a third
+axis. (Auto-computing an embedding is not in this version -- see *Advanced features*.)
 
 **First run.** Open the navigator, confirm the axes, and see the cloud. There is no
 environment build and no download -- it is pure Java and starts immediately.
@@ -31,14 +33,24 @@ environment build and no download -- it is pure Java and starts immediately.
 - **Open the navigator.** `Extensions > Cluster 3D Navigator > Open 3D navigator...`. It opens
   on the current image's detections by default and follows the active image -- switch images
   in QuPath and the cloud re-reads (in "Current image" mode).
-- **Pick or auto-detect the 3 axes.** The tool scans measurement names and preselects a
-  recognized triple (UMAP1/2/3, PCA1/2/3, PC1/2/3, tSNE1/2/3); a green "(auto-detected: ...)"
-  tag tells you it guessed. Otherwise choose X / Y / Z from the dropdowns of every numeric
-  measurement, or click **Change axes...** for a focused picker. Your choice is remembered per
-  project.
-- **Rotate / zoom / pan.** Left-drag to rotate the cloud, scroll to zoom toward the cursor,
-  middle-drag OR **Shift+left-drag** to pan (the Shift fallback works on laptops and trackpads
-  with no middle button). **Reset view** returns to a fit-all isometric tilt.
+- **Choose 2D or 3D.** The **View** toggle at the top switches between a rotatable **3D** cloud
+  (needs a 3-component embedding) and a flat top-down **2D** scatter (needs two axes). The tool
+  starts in your last-used mode; if the data has only two numeric measurements the 3D option is
+  disabled and it opens in 2D automatically.
+  - **Use a real 2D embedding for the 2D view.** For 2D, plot a genuine 2D dimensionality
+    reduction (a 2D UMAP / t-SNE computed for two components). Do **not** plot two axes of a 3D
+    UMAP: a 2D UMAP is optimized for two dimensions and looks different from any 2-axis slice of
+    a 3D one. If you switch to 2D while plotting two components of a 3D embedding, an on-screen
+    warning says so.
+- **Pick or auto-detect the axes.** The tool scans measurement names and preselects a recognized
+  embedding (UMAP1/2[/3], PCA1/2[/3], PC1/2[/3], tSNE1/2[/3]); a green "(auto-detected: ...)"
+  tag tells you it guessed. Otherwise choose the axes from the dropdowns of every numeric
+  measurement (Z is hidden in 2D), or click **Change axes...** for a focused picker. Your choice
+  is remembered per project.
+- **Rotate / zoom / pan.** In 3D, left-drag to rotate the cloud; in 2D there is nothing to
+  rotate, so left-drag pans. Scroll to zoom toward the cursor; middle-drag OR **Shift+left-drag**
+  also pans (the Shift fallback works on laptops and trackpads with no middle button). **Reset
+  view** returns to a fit-all view.
 - **Click a point to jump to the cell.** A single click selects that cell in QuPath, centers
   the viewer on it, and loads its crop into the **Cell preview** panel; if the cell lives in a
   different project image, that image opens first.
@@ -107,6 +119,8 @@ Persisted between sessions:
 
 - **Window size and position** -- the navigator remembers its last geometry.
 - **Mode** -- current-image vs project-images.
+- **View (2D / 3D)** -- the last dimensionality you chose. On data with only two numeric
+  measurements the tool always opens in 2D (3D is impossible) regardless of this setting.
 - **Last axis choice (per project)** -- the X / Y / Z measurements you last used; the picker
   preselects them next time (auto-detection still runs when there is nothing remembered).
 - **Background** -- the 3D view background color. Defaults to **Auto (theme)** (matches the
@@ -147,9 +161,9 @@ only -- reopen the picker with **Select images...** to change it).
 - **Empty / blank cloud after opening.** Usually the current image has no detections, or the
   chosen axes have no numeric values for these cells. Confirm detections exist and are
   classified, and that the axis dropdowns point at real numeric columns.
-- **"Need at least 3 numeric measurements..."** The detections carry fewer than 3 numeric
-  measurement columns. Cluster or embed upstream (QP-CAT UMAP/PCA, or a script that adds
-  numeric measurements), then reopen.
+- **"Need at least 2 numeric measurements..."** The detections carry fewer than 2 numeric
+  measurement columns (2 are needed for a 2D view, 3 for 3D). Cluster or embed upstream (QP-CAT
+  UMAP/PCA, or a script that adds numeric measurements), then reopen.
 - **"No detections in this image..."** The image (or whole project, in project-wide mode) has
   no detection objects. Detect and classify cells first.
 - **Clicking a point jumps to the wrong cell.** Usually a stale hierarchy, or a point in a
