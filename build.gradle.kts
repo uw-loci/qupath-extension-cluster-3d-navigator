@@ -16,7 +16,7 @@ plugins {
 qupathExtension {
     name = "qupath-extension-cluster-3d-navigator"
     group = "io.github.uw-loci"
-    version = "0.1.3"
+    version = "0.1.4"
     description = "Interactive in-QuPath 3D point cloud of clustered cells; click a point to select and center that cell in the viewer. Generic across any clustering tool."
     automaticModule = "io.github.uw.loci.extension.cluster3dnav"
 }
@@ -51,7 +51,7 @@ dependencies {
     // first (resolved here from mavenLocal). isTransitive=false: core's published POM
     // lists QuPath/JavaFX (injected by qupath-conventions) but the QuPath host provides
     // those at runtime -- bundling them would balloon the jar, so we shade only core.
-    implementation("io.github.uw-loci:cluster3d-core:0.1.3") { isTransitive = false }
+    implementation("io.github.uw-loci:cluster3d-core:0.1.4") { isTransitive = false }
 
     // For testing
     testImplementation(libs.bundles.qupath)
