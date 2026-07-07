@@ -90,9 +90,18 @@ environment build and no download -- it is pure Java and starts immediately.
 **Display options** (a collapsed panel in the top strip) hold refinements a first-timer never
 needs: a **Background** color picker (with an "Auto (theme)" checkbox that matches the QuPath
 light/dark theme), crop scale, point size, "Shade points by depth", "Preview crop on hover",
-"Show axis tripod", and "Representative cells per cluster". These persist between sessions. (The
-**"Show cell images"** toggle itself lives in the top control strip, right after
-**Change axes...**, so it is one click away.)
+"Show axis tripod", **"Show detection outlines"**, and "Representative cells per cluster". These
+persist between sessions. (The **"Show cell images"** toggle itself lives in the top control
+strip, grouped with the cell-limit / seed / points controls.)
+
+**See the segmentation on each cell.** Turn on **Show detection outlines** (Display options) to
+draw each cell's detection boundary (its ROI) on top of its crop, in the cell's cluster color --
+both in the in-cloud cell images and in the **Cell preview** panel. This is the quickest way to
+tell whether a cluster is real or an artifact of **segmentation errors** (merged, clipped, or
+over-split cells): if a cluster's crops show bad outlines, the cluster is a segmentation problem,
+not biology. The outline is crisp in the Cell preview and in zoomed-in thumbnails; it fades to
+invisible on the tiniest far-out thumbnails (where the class-colored border still conveys class).
+Toggling it re-renders the crops.
 
 **Planned / not yet available** (none of these ship in this version):
 
@@ -131,6 +140,9 @@ Persisted between sessions:
 - **Shade points by depth** -- depth-cue shading (default on).
 - **Preview crop on hover** -- load a thumbnail on hover, not only on click (default off).
 - **Show axis tripod** -- the corner X/Y/Z direction marker (default on).
+- **Show detection outlines** -- draw each cell's segmentation boundary (its detection ROI) on
+  its crop, in the cell's cluster color, in both the in-cloud cell images and the Cell preview
+  (default off). Helps spot clusters caused by segmentation errors.
 - **Cell limit per image** (top strip) -- caps how many cells per image are loaded (0 = no
   limit). A performance option for slower computers: it improves responsiveness but limits the
   data shown. Cells are chosen so every cluster stays represented (each cluster keeps at least its
