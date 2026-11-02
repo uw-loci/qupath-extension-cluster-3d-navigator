@@ -43,17 +43,22 @@ environment build and no download -- it is pure Java and starts immediately.
     a 3D one. If you switch to 2D while plotting two components of a 3D embedding, an on-screen
     warning says so.
 - **Pick or auto-detect the axes.** The tool scans measurement names and preselects a recognized
-  embedding (UMAP1/2[/3], PCA1/2[/3], PC1/2[/3], tSNE1/2[/3]); a green "(auto-detected: ...)"
-  tag tells you it guessed. Otherwise choose the axes from the dropdowns of every numeric
+  embedding (UMAP1/2[/3], PCA1/2[/3], PC1/2[/3], tSNE1/2[/3], also with a tool or run name
+  around them, such as "QPCAT 3D UMAP1"); a green "(auto-detected: ...)" tag tells you it
+  guessed. If an image carries more than one embedding (for example a 2D and a 3D UMAP from
+  QP-CAT), check all three dropdowns: the guess picks each component separately and can mix
+  axes from different embeddings. Otherwise choose the axes from the dropdowns of every numeric
   measurement (Z is hidden in 2D), or click **Change axes...** for a focused picker. Your choice
-  is remembered per project.
-- **Rotate / zoom / pan.** In 3D, left-drag to rotate the cloud; in 2D there is nothing to
+  is remembered per project, and the classes you have hidden stay hidden when you change an axis.
+- **Rotate / zoom / pan.** In 3D, left-drag to rotate the cloud, all the way round in any
+  direction; in 2D there is nothing to
   rotate, so left-drag pans. Scroll to zoom toward the cursor; middle-drag OR **Shift+left-drag**
   also pans (the Shift fallback works on laptops and trackpads with no middle button). **Reset
   view** returns to a fit-all view.
 - **Click a point to jump to the cell.** A single click selects that cell in QuPath, centers
   the viewer on it, and loads its crop into the **Cell preview** panel; if the cell lives in a
-  different project image, that image opens first.
+  different project image, that image opens first. The Cell preview stays folded until your
+  first click, so the class list has the side column to itself until then.
 - **Hover to inspect.** Hovering a point shows a tooltip with the class and the RAW measurement
   values under the real axis names. Turn on **Preview crop on hover** (Display options) to also
   load the crop thumbnail while hovering; by default the crop loads on click.
@@ -71,7 +76,10 @@ environment build and no download -- it is pure Java and starts immediately.
   Clicking an image still selects and centers that cell, exactly like clicking a point.
 - **Show / hide classes.** The legend lists each class with its color, count, and a checkbox.
   Untick a class to hide those points (useful for isolating a rare population). **All** / **None**
-  flip every class at once. The counter reads "Points: shown / total"; if some cells lack a value
+  flip every class at once. Classes are listed by name, with numbers in numeric order. With more
+  than 12 classes a **Filter classes...** box appears above the list: typing narrows the list
+  (the heading reads, for example, "CLASSES (13 of 40)"), and **All** / **None** then act only on
+  the classes listed. The counter reads "Points: shown / total"; if some cells lack a value
   on a chosen axis they are counted as omitted (not silently dropped) and a note explains it.
 - **Current image vs a subset of project images.** Switch the mode toggle to **Project
   images...** and a picker opens so you choose *which* project images to include -- filter by

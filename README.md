@@ -9,7 +9,7 @@ cell in the QuPath viewer** -- an interesting spot in cluster space becomes the 
 the slide in one click. Use the **2D** view for genuine 2D embeddings (a 2D UMAP), **3D** for
 a 3-component embedding.
 
-- Version: 0.1.3
+- Version: 0.1.6
 - License: **GPL-3.0-or-later** -- links GPLv3 QuPath core (and adapts code from Apache-2.0
   QP-CAT, which is GPL-compatible). The GPL driver is the QuPath link, not QP-CAT. The shared
   3D viewer lives in the separate Apache-2.0 `cluster3d-core` library; this repo is a thin GPL
@@ -46,7 +46,7 @@ Add the `qupath-catalog-mikenelson` catalog in QuPath's Extension Manager, then 
 
 ### Manual jar (fallback)
 
-Download `qupath-extension-cluster-3d-navigator-0.1.0-all.jar` from Releases, drop it into
+Download `qupath-extension-cluster-3d-navigator-<version>-all.jar` from Releases, drop it into
 `~/QuPath/v0.7/extensions/` (Linux) or the equivalent on Windows, and restart QuPath.
 
 ### Platform caveat
