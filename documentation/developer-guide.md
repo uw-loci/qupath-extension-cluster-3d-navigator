@@ -21,7 +21,7 @@ Apache-2.0 library `cluster3d-core`; this repo is a thin GPL shell.
   Output: `build/libs/qupath-extension-cluster-3d-navigator-<version>-all.jar` (shades core).
 - Drop the jar into `~/QuPath/v0.7/extensions/` and restart QuPath to test (extensions do not
   hot-load).
-- The navigator depends on `io.github.uw-loci:cluster3d-core:0.1.14` as a non-transitive
+- The navigator depends on `io.github.uw-loci:cluster3d-core:0.1.15` as a non-transitive
   `implementation` and shades it into the `-all.jar`. QuPath + JavaFX are host-provided (not
   bundled). The unit tests live in `cluster3d-core`.
 

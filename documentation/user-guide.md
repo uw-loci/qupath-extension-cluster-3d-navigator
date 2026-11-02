@@ -46,8 +46,8 @@ environment build and no download -- it is pure Java and starts immediately.
   embedding (UMAP1/2[/3], PCA1/2[/3], PC1/2[/3], tSNE1/2[/3], also with a tool or run name
   around them, such as "QPCAT 3D UMAP1"); a green "(auto-detected: ...)" tag tells you it
   guessed. If an image carries more than one embedding (for example a 2D and a 3D UMAP from
-  QP-CAT), check all three dropdowns: the guess picks each component separately and can mix
-  axes from different embeddings. Otherwise choose the axes from the dropdowns of every numeric
+  QP-CAT), all the axes come from one of them: the 3D view prefers a 3D embedding and the 2D
+  view a 2D one. Otherwise choose the axes from the dropdowns of every numeric
   measurement (Z is hidden in 2D), or click **Change axes...** for a focused picker. Your choice
   is remembered per project, and the classes you have hidden stay hidden when you change an axis.
 - **Rotate / zoom / pan.** In 3D, left-drag to rotate the cloud, all the way round in any
