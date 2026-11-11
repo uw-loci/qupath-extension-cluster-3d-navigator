@@ -51,7 +51,7 @@ dependencies {
     // first (resolved here from mavenLocal). isTransitive=false: core's published POM
     // lists QuPath/JavaFX (injected by qupath-conventions) but the QuPath host provides
     // those at runtime -- bundling them would balloon the jar, so we shade only core.
-    implementation("io.github.uw-loci:cluster3d-core:0.1.15") { isTransitive = false }
+    implementation("io.github.uw-loci:cluster3d-core:0.1.16") { isTransitive = false }
 
     // For testing
     testImplementation(libs.bundles.qupath)
